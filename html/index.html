@@ -54,7 +54,7 @@ div {
 }
 
 .left {
-  height: 1000px;
+  height: 1250px;
   width: 45px;
   background-color: #e0eeee;
   float: left;
@@ -62,7 +62,7 @@ div {
 }
 
 .right {
-  height: 1500px;
+  height: 1250px;
   width: 45px;
   background-color: #e0eeee;
   float: right;
@@ -114,6 +114,25 @@ a {
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-7549a40147ccd0ba0a6b5373d87e770e49bb4689f1c2dc30cccc7463f207f997.js"></script>
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+
+<script>
+  console.log("INCLUDE: this-is-fine-meme.png")
+  var dev_env = false
+  if (dev_env == false) {
+      fetch("https://v083tynps7.execute-api.us-east-1.amazonaws.com/Prod/visitorCount")
+          .then(function (response) {
+              return response.json()
+          })
+          .then(function (myJson) {
+              console.log("Visitor Count: " + myJson.visitorCount);
+              document.querySelector("#visitorCount").innerHTML = "Total visitors: " + myJson.visitorCount;
+          })
+          .catch(function (error) {
+              console.log("Error: " + error)
+          })
+  }
+</script>
+
 </head>
 
 <body>
@@ -173,12 +192,24 @@ a {
     <li>Tafel</li>
   </ul>
 </div>
+<!-- START VISITOR COUNTER -->
+<div class="row mb-5 justify-content-center">
+  <div class="col-md-5 text-center">
+      <div class="ftco-footer-widget">          
+          <p style="text-align:center;" class="h3 email" id="visitorCount">Total Visitors:
+          </p>
+          
+      </div>
+  </div>
+</div> <!-- END VISITOR COUNTER -->
 <div class="right"></div>
 <div id="footer">
   <h2 id="name">Very Fancy Signature: Anna Kozar (. ❛ ᴗ ❛.)</h2></div>
   
 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
   
+
+
 </body>
 
 </html>
