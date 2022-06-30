@@ -2,19 +2,17 @@ import json
 import boto3
 import os
 
-def handler(event, context):
+def lambda_handler(event, context):
     # Initialize dynamodb boto3 object
     dynamodb = boto3.resource('dynamodb')
-    # Set dynamodb table name variable from env
-    ddbTableName = os.environ['databaseName']
-    table = dynamodb.Table(ddbTableName)
+    table = dynamodb.Table('counter')
 
     # Atomic update item in table or add if doesn't exist
     ddbResponse = table.update_item(
         Key={
-            "id": "visitorCount"
+            "id": "count"
         },
-        UpdateExpression='ADD amount :inc',
+        UpdateExpression='ADD visitor_count :inc',
         ExpressionAttributeValues={
             ':inc': 1
         },
@@ -22,7 +20,7 @@ def handler(event, context):
     )
 
     # Format dynamodb response into variable
-    responseBody = json.dumps({"visitorCount": int(float(ddbResponse["Attributes"]["amount"]))})
+    responseBody = json.dumps({"count": int(float(ddbResponse["Attributes"]["visitor_count"]))})
 
     # Create api response object
     apiResponse = {
