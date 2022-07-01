@@ -119,12 +119,13 @@ a {
   var dev_env = false
   if (dev_env == false) {
       fetch("https://cc3k8vhge1.execute-api.us-east-1.amazonaws.com/prod/counter")
-          .then(function (response) {
+          .then(function (response) {              
               return response.json()
           })
           .then(function (myJson) {
-              console.log("Visitor Count: " + myJson.visitorCount);
-              document.querySelector("#visitorCount").innerHTML = "Total visitors: " + myJson.visitorCount;
+              //console.log("test" + myJson.);
+              console.log("Visitor Count: " + myJson.count);
+              document.querySelector("#visitorCount").innerHTML = "Total visitors: " + myJson.count;
           })
           .catch(function (error) {
               console.log("Error: " + error)
